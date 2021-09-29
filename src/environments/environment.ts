@@ -7,7 +7,7 @@ import {Environment} from "./interface";
 
 export const environment:Environment = {
   production: false,
-  apiKey: 'AIzaSyDYpmxqyWS1ERTKPbiPfmfKEDLHW3B6cyo'
+  apiKey: 'Pass your key here'
 };
 
 /*
