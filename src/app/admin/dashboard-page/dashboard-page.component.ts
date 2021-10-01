@@ -10,11 +10,13 @@ import {Subscription} from "rxjs";
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
-  posts: Post[]
-  postSub!: Subscription
+  posts: Post[];
+  postSub!: Subscription;
+  searchStr: string;
 
   constructor(private postService: PostsService) {
-    this.posts = []
+    this.posts = [];
+    this.searchStr = '';
   }
 
   ngOnInit(): void {
