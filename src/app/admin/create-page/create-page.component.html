@@ -1,1 +1,26 @@
-<p>create-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>New post</h1>
+
+  <div class="form-control">
+    <label for="title">Post title:</label>
+    <input type="text" id="title" formControlName="title">
+    <div class="validation" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      <small *ngIf="form.get('title')?.errors?.required">This field cant be empty.Enter post title!</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label>Post content:</label>
+    <quill-editor formControlName="text"></quill-editor>
+  </div>
+
+  <div class="form-control">
+    <label for="author">Author</label>
+    <input type="text" id="author" formControlName="author">
+    <div class="validation" *ngIf="form.get('author')?.touched && form.get('author')?.invalid">
+      <small *ngIf="form.get('author')?.errors?.required">This field cant be empty.Enter your name!</small>
+    </div>
+  </div>
+
+  <button class="btn btn-block btn-dark" [disabled]="form.invalid">Create post</button>
+</form>
