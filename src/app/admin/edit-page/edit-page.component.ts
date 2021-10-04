@@ -5,6 +5,7 @@ import {switchMap} from "rxjs/operators";
 import {Post} from "../../shared/interfaces";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-edit-page',
@@ -16,7 +17,8 @@ export class EditPageComponent implements OnInit, OnDestroy {
   post!: Post;
   submitted: boolean;
   uSub!: Subscription;
-  constructor(private route: ActivatedRoute, private postService: PostsService, private router:Router) {
+  constructor(private route: ActivatedRoute, private postService: PostsService,
+              private router:Router, private alertService: AlertService) {
     this.form = new FormGroup({
       title: new FormControl('def', Validators.required),
       text: new FormControl('def', Validators.required)
@@ -50,6 +52,7 @@ export class EditPageComponent implements OnInit, OnDestroy {
       text: this.form.value.text,
     }).subscribe(() => {
       this.submitted = false;
+      this.alertService.warning('Updated!');
       this.router.navigate(['/admin','dashboard']);
     })
   }
