@@ -23,6 +23,17 @@ export class PostsService {
       }))
   }
 
+  getById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${environment.DBUrl}/posts/${id}.json`)
+      .pipe(map((post:Post) => {
+        return {
+          ...post,
+          id,
+          date: new Date(post.date)
+        }
+      }))
+  }
+
   getAll(): Observable<Post[]>{
     return this.http.get(`${environment.DBUrl}/posts.json`)
       .pipe(map((response:{[key: string]: any}) => {
@@ -39,4 +50,9 @@ export class PostsService {
   remove(id: string) : Observable<void> {
     return this.http.delete<void>(`${environment.DBUrl}/posts/${id}.json`);
   }
+
+  update(post:Post): Observable<Post>{
+    return this.http.patch<Post>(`${environment.DBUrl}/posts/${post.id}.json`,post)
+  }
+
 }
